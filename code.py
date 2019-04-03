@@ -34,7 +34,11 @@ def build(event):
                           center[0] + table[1][0] * unit, center[1] + table[1][1] * unit,
                           width=2, tag="line")  # make new line
         else:  # for square function
-            table = [(x, y(x, task)) for x in arange(-15, 15, 0.001)]
+            if "sqrt(x)" in task or "x ** 0.5" in task:
+                start = 0
+            else:
+                start = -15
+            table = [(x, y(x, task)) for x in arange(start, 15, 0.001)]
             for j in range(len(table))[:-2]:
                 c.create_line(center[0] + table[j][0] * unit, center[1] + table[j][1] * unit,
                               center[0] + table[j + 1][0] * unit, center[1] + table[j + 1][1] * unit,
